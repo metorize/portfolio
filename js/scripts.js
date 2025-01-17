@@ -40,7 +40,6 @@ class DragScroll {
     
     calculate() {
         this.progress = 0;
-        // this.wrapWidth = this.items[0].clientWidth * this.items.length;
         this.wrapWidth = Array.from(this.items).reduce((acc, item) => acc + item.offsetWidth, 0);
         this.wrap.style.width = `${this.wrapWidth}px`;
         this.maxScroll = this.wrapWidth - this.el.clientWidth;
@@ -118,6 +117,3 @@ const animateScroll = () => {
 };
 
 animateScroll();
-
-// Popup
-

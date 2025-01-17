@@ -10,7 +10,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: "Roboto", sans-serif;
+    font-family: "Poppins";
     background: #F4F6EB;
     font-size: 16px;
 }
@@ -30,8 +30,6 @@ body {
 a {
     text-decoration: none;
     color: #2E2E2E;
-    font-family: "Roboto", sans-serif;
-    font-weight: 400;
     font-style: normal;
     
 }
