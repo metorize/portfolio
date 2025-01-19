@@ -17,12 +17,13 @@ class DragScroll {
         this.x = 0; // slighty lerped version of progress (needed for smooth sliding)
         this.playrate = 0; // progress bar ratio (0 - 1)
 
-        this.bindings();
-        this.events();
-        this.calculate();
-        this.raf();
+        this.bindings(); // bind all methods to the class
+        this.events(); // add all event listeners
+        this.calculate(); // calculate wrap width and max scroll
+        this.raf(); // start requestAnimationFrame loop
     }
 
+    // bind all methods to the class
     bindings() {
         [
             "events",
@@ -37,7 +38,8 @@ class DragScroll {
             this[method] = this[method].bind(this);
         });
     }
-    
+
+    // calculate wrap width and max scroll
     calculate() {
         this.progress = 0;
         this.wrapWidth = Array.from(this.items).reduce((acc, item) => acc + item.offsetWidth, 0); // calculate wrap width
@@ -45,29 +47,33 @@ class DragScroll {
         this.maxScroll = this.wrapWidth - this.el.clientWidth; // calculate max scroll
     }
 
+    // scroll event handler
     handleWheel(e) {
-        this.progress += e.deltaY;
+        this.progress += e.deltaY; // add deltaY(scroll amount) to progress
         this.move();
     }
 
+    // touch/drag beginning event handlers
     handleTouchStart(e) {
-        e.preventDefault();
-        this.dragging = true;
-        this.startX = e.clientX || e.touches[0].clientX;
+        e.preventDefault(); // prevent default touch behavior
+        this.dragging = true; // set dragging to true
+        this.startX = e.clientX || e.touches[0].clientX; // set start x position
     }
 
+    // touch/drag move event handler
     handleTouchMove(e) {
-        if (!this.dragging) return false;
-        const x = e.clientX || e.touches[0].clientX;
-        this.progress += (this.startX - x) * 2.5;
-        this.startX = x;
+        if (!this.dragging) return false; // do nothing if not dragging
+        const x = e.clientX || e.touches[0].clientX; // get current x position (mouse or touchpad)
+        this.progress += (this.startX - x) * 2.5; // add difference between start x and current x to progress
+        this.startX = x; // set start x to current x
         this.move();
     }
-
+    // end of touch/drag event handler
     handleTouchEnd() {
         this.dragging = false;
     }
 
+    // move method to restrict progress between 0 and maxScroll
     move() {
         this.progress = clamp(this.progress, 0, this.maxScroll)
     }
