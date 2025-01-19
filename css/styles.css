@@ -34,17 +34,35 @@ a {
     
 }
 
+#Contacts {
+    transition: 0.5s ease;
+}
+
+#Contacts:hover {
+    transform: scale(1.1);
+}
+
 #portfolio {
     position: absolute;
     bottom: 0;
     right: 0;
     padding: 3em;
 }
+
+
 .logo {
     font-family: "Afacad", sans-serif;
     color: #D30000;
     font-weight: 400;
     font-style: normal;
+    font-size: 35px;
+    height: 60px;
+    transition: 0.75s ease;
+}
+
+.logo:hover {
+    transform: scale(1.1);
+    letter-spacing: 1px;
 }
 
 .slider {
@@ -98,23 +116,57 @@ a {
     transform: scaleX(0);
     transform-origin: 0 0;
 }
+
 .contacts_container {
     display: flex;
-    align-content: space-between;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
 }
 
 #contact_photo {
     width: 290px;
     height: 290px;
     border-radius: 100%;
+    transition: 1s ease;
 }
 
+#contact_photo:hover{
+    transform: scale(1.02)    
+}
+
+.metorize {
+/*     font-family: "Afacad", sans-serif; */
+    color: #D30000;
+    font-weight: 400;
+    font-style: normal;
+/*     font-size: 29px; */
+}
 .contacts_text {
-    font-size: 20px;
-    width: 635px;
-    line-height: 125%;
+    font-size: 22px;
+    width: 700px;
+    line-height: 140%;
     font-family: Poppins;
     text-align: left;
     display: inline-block;
-    height: 380px;
+}
+
+.social-icons{
+    display: flex;
+    margin-left: 450px;
+}
+
+.social-icons a{
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 10px;
+    font-size: 25px;
+    margin: 20px 0px 0px 30px;
+    transition: 0.3s ease;
+}
+
+.social-icons a:hover {
+    transform: scale(1.1) translateX(4px);
 }
