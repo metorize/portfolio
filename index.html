@@ -51,14 +51,12 @@
                 <div class="slider-progress-bar"></div>
             </div>
         </div>
-
-        <!-- Popup Contact -->
-        <!-- <div class="popup">
-            <button class="close-btn">&times;</button>
-            <h2>Title</h2>
-            <p>Lorem ipsum bla bla bla</p>
-        </div> -->
-    <script src="js/scripts.js"></script>
-
+        <script>
+            if (window.innerWidth > 768) {
+                var script = document.createElement('script');
+                script.src = 'js/scripts.js';
+                document.body.appendChild(script);
+            }
+        </script>
     </body>
 </html>

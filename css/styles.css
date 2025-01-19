@@ -171,17 +171,23 @@ a {
     transform: scale(1.1) translateX(4px);
 }
 
-/* Responsive Design */
+/* Responsive */
 @media (max-width: 768px) {
     .nav {
         height: auto;
         padding: 1em;
+        z-index: 1;
+    }
+    
+    #portfolio {
+        padding: 1em;
+        font-size: 14px;
     }
     
     .logo {
         font-size: 30px;
     }
-
+    /* Contacts page */
     .contacts_container {
         flex-direction: column;
         align-items: center;
@@ -209,4 +215,34 @@ a {
         font-size: 30px;
         margin: 15px;
     }
+    
+    /* Slider */
+    .slider-progress {
+        display: none;
+    }
+    
+    .slider {
+        width: 100%;
+        cursor: grab;
+        overflow-x: auto;
+    }
+
+    .slider-wrapper {
+        display: flex;
+        flex-direction: row;
+        z-index: 1000;
+        width: max-content;
+    }
+
+    .slider-item {
+        display: inline-block;
+        width: 100vw;
+    }
+
+    .slider-item figure {
+        display: flex;
+        height: auto;
+        width: 100%;
+    }
+    
 }
