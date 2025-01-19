@@ -172,7 +172,7 @@ a {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 768px) or (max-width: 1080px) {
     .nav {
         height: auto;
         padding: 1em;
