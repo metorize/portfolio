@@ -1,5 +1,5 @@
-const lerp = (f0, f1, t) => (1 - t) * f0 + t * f1;
-const clamp = (val, min, max) => Math.max(min, Math.min(val, max));
+const lerp = (f0, f1, t) => (1 - t) * f0 + t * f1; // linear interpolation between f0 and f1
+const clamp = (val, min, max) => Math.max(min, Math.min(val, max)); // restrict val between min and max
 
 class DragScroll {
     constructor(obj) {
@@ -11,11 +11,11 @@ class DragScroll {
     }
 
     init() {
-        this.progress = 0;
-        this.speed = 0;
-        this.oldX = 0;
-        this.x = 0;
-        this.playrate = 0;
+        this.progress = 0; // scroll progress
+        this.speed = 0; // x - oldX (delta A.K.A speed of the scroll) (needed for item scaling animations)
+        this.oldX = 0; // previous x position (needed for speed calculation)
+        this.x = 0; // slighty lerped version of progress (needed for smooth sliding)
+        this.playrate = 0; // progress bar ratio (0 - 1)
 
         this.bindings();
         this.events();
@@ -40,9 +40,9 @@ class DragScroll {
     
     calculate() {
         this.progress = 0;
-        this.wrapWidth = Array.from(this.items).reduce((acc, item) => acc + item.offsetWidth, 0);
-        this.wrap.style.width = `${this.wrapWidth}px`;
-        this.maxScroll = this.wrapWidth - this.el.clientWidth;
+        this.wrapWidth = Array.from(this.items).reduce((acc, item) => acc + item.offsetWidth, 0); // calculate wrap width
+        this.wrap.style.width = `${this.wrapWidth}px`; // dynamically set wrap width
+        this.maxScroll = this.wrapWidth - this.el.clientWidth; // calculate max scroll
     }
 
     handleWheel(e) {
@@ -87,19 +87,19 @@ class DragScroll {
     }
 
     raf() {
-        this.x = lerp(this.x, this.progress, 0.1);
-        this.playrate = this.x / this.maxScroll;
+        this.x = lerp(this.x, this.progress, 0.1); // interpolation between x and progress
+        this.playrate = this.x / this.maxScroll; // progress bar calculation (0 - 1)
 
-        this.wrap.style.transform = `translatex(${-this.x}px)`;
-        this.bar.style.transform = `scaleX(${0.18 + this.playrate * 0.82})`;
+        this.wrap.style.transform = `translatex(${-this.x}px)`; // wrapper sliding on x pixels to the left
+        this.bar.style.transform = `scaleX(${0.18 + this.playrate * 0.82})`; // progress bar scaling from 0.18 to 1
 
-        this.speed = Math.min(100, this.oldX - this.x);
+        this.speed = Math.min(100, this.oldX - this.x); // speed calculation (delta x)
         this.oldX = this.x;
 
-        this.scale = lerp(this.scale, this.speed, 0.1);
+        this.scale = lerp(this.scale, this.speed, 0.1); // interpolation of the scaling
         this.items.forEach((item) => {
-            item.style.transform = `scale(${1 - Math.abs(this.speed) * 0.005})`;
-            item.querySelector("video").style.transform = `scaleX(${1 + Math.abs(this.speed) * 0.004})`;
+            item.style.transform = `scale(${1 - Math.abs(this.speed) * 0.005})`; // scaling of the item
+            item.querySelector("video").style.transform = `scaleX(${1 + Math.abs(this.speed) * 0.004})`; //scaling of the video
         });
     }
 }
